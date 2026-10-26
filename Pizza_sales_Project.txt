@@ -1,0 +1,93 @@
+Use Project;
+
+-- KPI
+-- 1. Total Revenue:
+select round(sum(total_price),2) as total_revenue
+from pizza_sales;
+
+-- 2.Average Order Value:
+select round(sum(total_price)/ count(distinct(order_id)),2) as Avg_order_value
+from pizza_sales;
+
+-- 3. Total Pizzas Sold
+select sum(quantity) as total_pizza_sold
+from pizza_sales;
+
+-- 4. Total Orders
+select count(distinct(order_id)) as total_order
+from pizza_sales;
+
+-- 5. Average Pizzas Per Order
+select round(sum(quantity)/count(distinct(order_id)),2) as Avg_pizza_order
+from pizza_sales; 
+
+-- B. Daily Trend for Total Orders
+select dayname(converted_date) as Order_day,count(distinct(order_id)) as total_orders
+from pizza_sales
+group by dayname(converted_date);
+
+-- C. Monthly Trend for Orders
+select monthname(converted_date) as Order_month,count(distinct(order_id)) as total_orders
+from pizza_sales
+group by monthname(converted_date);
+
+-- D. % of Sales by Pizza Category
+select pizza_category,round(sum(total_price)*100/(select sum(total_price) from pizza_sales),2) as PCT
+from pizza_sales
+group by pizza_category
+order by PCT desc;
+
+-- E. % of Sales by Pizza Size
+select pizza_size,round(sum(total_price)*100/(select sum(total_price) from pizza_sales),2) as PCT
+from pizza_sales
+group by pizza_size
+order by PCT desc;
+
+ -- Total Pizzas Sold by Pizza Category
+ 
+select pizza_category,sum(quantity) as total_pizzas
+from pizza_sales
+group by pizza_category
+order by total_pizzas desc;
+
+-- G. Top 5 Pizzas by Revenue
+select pizza_name,round(sum(total_price),2)as total_revenue
+from pizza_sales
+group by pizza_name
+order by total_revenue desc
+limit 5;
+
+-- H. Bottom 5 Pizzas by Revenue
+select pizza_name,round(sum(total_price),2) as total_revenue
+from pizza_sales
+group by pizza_name
+order by total_revenue
+limit 5;
+
+-- I. Top 5 Pizzas by Quantity
+select pizza_name,round(sum(quantity),2) as total_quantity
+from pizza_sales
+group by pizza_name
+order by total_quantity desc
+limit 5;
+
+-- J. Bottom 5 Pizzas by Quantity
+select pizza_name,round(sum(quantity),2) as total_quantity
+from pizza_sales
+group by pizza_name
+order by total_quantity
+limit 5;
+
+-- K. Top 5 Pizzas by Total Orders
+select pizza_name,count(distinct order_id) as total_order
+from pizza_sales
+group by pizza_name
+order by total_order desc
+limit 5;
+
+-- L. Borrom 5 Pizzas by Total Orders
+select pizza_name,count(distinct order_id) as total_order
+from pizza_sales
+group by pizza_name
+order by total_order 
+limit 5
