@@ -14,7 +14,9 @@ This project analyses pizza sales data using MySQL and Power BI to understand sa
 - Compared sales by pizza category and size.
 - Identified top- and bottom-performing pizzas.
 - Validated Power BI KPI calculations against SQL results.
+## Dashboard Preview
 
+![Pizza Sales Dashboard](Pizza_Sales_Dashboard.png)
 ## Dashboard
 The Power BI dashboard presents key metrics and sales trends through KPI cards, bar charts, line charts, and doughnut charts.
 
